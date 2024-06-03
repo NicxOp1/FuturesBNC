@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 require('dotenv').config();
+const cors = require('cors');
+const app = express();
 const mongoose = require('mongoose');
 
 // Configurar mongoose
@@ -26,7 +28,9 @@ const KlineSchema = new mongoose.Schema({
 
 const Kline = mongoose.model('Kline', KlineSchema);
 
-const app = express();
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 const port = process.env.PORT || 3000;
 
 const API_KEY = process.env.API_KEY;
